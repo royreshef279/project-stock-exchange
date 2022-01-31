@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS Project 2</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="marquee" class="marquee"></div>
+    <div class="wrapper" id="form"></div>
+    <script src="api.js"></script>
+    <script src="Marquee.js"></script>
+    <script src="SearchForm.js"></script>
+    <script src="SearchResult.js"></script>
+    <!-- <script src="main.js"></script> -->
+    <script>
+      (async function () {
+        const marqueeInstance = new Marquee(document.getElementById("marquee"));
+        marqueeInstance.displayMarquee();
+        const searchFormInstance = new SearchForm(
+          document.getElementById("form")
+        );
+        const searchResultList = document.createElement("div");
+        searchResultList.id = "search-results";
+        searchResultList.className = "autocom-box";
+        searchResultListInstance = new SearchResult(searchResultList);
+        searchFormInstance.searchInput.append(searchResultListInstance.result);
+        searchFormInstance.onSearch((companies,input) => {
+          //onsearch takes function as parameter, companies and input are the parameters of this arrow function
+          searchResultListInstance.renderResults(companies,input);
+        });
+      })();
+    </script>
+  </body>
+</html>
